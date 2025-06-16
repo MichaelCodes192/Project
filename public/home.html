@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Home - Chat</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+  <h1>Welcome to the Home Page</h1>
+  <div id="chatBox" class="chat-box"></div>
+
+  <input type="text" id="chatInput" placeholder="Type your message..." />
+  <button id="sendBtn">Send</button>
+
+  <script>
+    const username = localStorage.getItem('username');
+    if (!username) location.href = 'index.html';
+
+    const socket = io();
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const chatBox = document.getElementById('chatBox');
+
+    sendBtn.onclick = () => {
+      const msg = chatInput.value.trim();
+      if (msg) {
+        socket.emit('chatMessage', { username, message: msg });
+        chatInput.value = '';
+      }
+    };
+
+    socket.on('chatMessage', data => {
+      const p = document.createElement('p');
+      p.innerHTML = `<strong>${data.username}:</strong> ${data.message}`;
+      chatBox.appendChild(p);
+    });
+  </script>
+</body>
+</html>

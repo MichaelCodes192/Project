@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact Us</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- 🔗 Top Navigation Tabs -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-item">🏠 Home</a>
+      <a href="games.html" class="nav-item">🎮 Games</a>
+      <a href="download.html" class="nav-item">📦 Downloads</a>
+      <a href="contact.html" class="nav-item active">✉️ Contact</a>
+    </div>
+  </nav>
+
+  <h2>Contact Us</h2>
+  <form id="contactForm">
+    <input type="email" name="email" placeholder="Your Email" required><br>
+    <textarea name="message" placeholder="Your Message" required></textarea><br>
+    <button type="submit">Send Message</button>
+    <p id="contactMessage"></p>
+  </form>
+
+  <script>
+    document.getElementById('contactForm').onsubmit = async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(e.target).entries());
+
+      const res = await fetch('/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      const result = await res.json();
+      document.getElementById('contactMessage').textContent = result.message;
+    };
+  </script>
+
+</body>
+</html>
+
