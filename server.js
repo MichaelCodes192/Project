@@ -52,7 +52,7 @@ app.post('/signup', async (req, res) => {
       [gmail, username, hashed, token], err => {
         if (err) return res.json({ success: false, message: "Signup failed." });
 
-        const link = `http://localhost:3000/verify?token=${token}`;
+        const link = `https://project-a-exwq.onrender.com/verify?token=${token}`;
         console.log(`[SIGNUP] Sending verification to ${gmail} using token: ${token}`);
 
         sendEmail('public/email-templates/verify.html', gmail, "Verify Your Email", '{{verify_link}}', link);
@@ -95,7 +95,7 @@ app.post('/reset-request', (req, res) => {
 
   db.run("UPDATE users SET reset_token = ? WHERE gmail = ?", [token, gmail], function (err) {
     if (this.changes > 0) {
-      const link = `http://localhost:3000/reset-password.html?token=${token}`;
+      const link = `https://project-a-exwq.onrender.com/reset-password.html?token=${token}`;
       sendEmail('public/email-templates/reset.html', gmail, "Reset Your Password", '{{reset_link}}', link);
       res.json({ success: true, message: "Reset link sent." });
     } else {
