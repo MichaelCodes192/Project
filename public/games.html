@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Games</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
@@ -13,12 +13,25 @@
       <a href="games.html" class="nav-item active">🎮 Games</a>
       <a href="download.html" class="nav-item">📦 Downloads</a>
       <a href="contact.html" class="nav-item">✉️ Contact</a>
+      <a href="profile.html" class="nav-item">👤 Profile</a>
+      <button onclick="toggleDarkMode()" style="margin-left:auto; padding:10px; background:none; color:white; border:none;">🌓</button>
     </div>
   </nav>
 
-  <h1>Play Games</h1>
-  <iframe src="https://michaelcodes192.github.io/Slope-v2/" width="800" height="600"></iframe><br>
-  <iframe src="https://michaelcodes192.github.io/Password-Game/index.html" width="800" height="600"></iframe>
+  <h1 style="text-align:center;">Play Our Games</h1>
 
+  <div class="games-container">
+    <div class="game-card">
+      <iframe class="game-frame" src="https://michaelcodes192.github.io/Slope-v2/"></iframe>
+      <div class="game-title">Slope</div>
+    </div>
+
+    <div class="game-card">
+      <iframe class="game-frame" src="https://michaelcodes192.github.io/Password-Game/index.html"></iframe>
+      <div class="game-title">Password Game</div>
+    </div>
+  </div>
+
+  <script src="js/dark-mode.js"></script>
 </body>
 </html>

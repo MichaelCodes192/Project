@@ -7,35 +7,49 @@
 </head>
 <body>
 
-  <!-- Navigation -->
+  <!-- 🔗 Top Navigation Tabs -->
   <nav class="navbar">
     <div class="nav-container">
       <a href="index.html" class="nav-item active">🏠 Home</a>
       <a href="games.html" class="nav-item">🎮 Games</a>
       <a href="download.html" class="nav-item">📦 Downloads</a>
       <a href="contact.html" class="nav-item">✉️ Contact</a>
+      <a href="profile.html" class="nav-item">👤 Profile</a>
+      <button onclick="toggleDarkMode()" style="margin-left:auto; padding:10px; background:none; color:white; border:none; cursor:pointer;">🌓</button>
     </div>
   </nav>
 
-  <h2>Signup</h2>
-  <form id="signupForm">
-    <input type="email" name="gmail" placeholder="Gmail" required><br>
-    <input type="text" name="username" placeholder="Username" required><br>
-    <input type="password" name="password" placeholder="Password" required><br>
-    <button type="submit">Sign Up</button>
-    <p id="signupMessage"></p>
-  </form>
+  <div class="auth-container">
+    <!-- Signup Section -->
+    <div class="auth-card">
+      <h2>📝 Sign Up</h2>
+      <form id="signupForm">
+        <input type="email" name="gmail" placeholder="Gmail" required>
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Sign Up</button>
+        <p id="signupMessage"></p>
+      </form>
+    </div>
 
-  <h2>Login</h2>
-  <form id="loginForm">
-    <input type="text" name="username" placeholder="Username" required><br>
-    <input type="password" name="password" placeholder="Password" required><br>
-    <button type="submit">Login</button>
-    <p id="loginMessage"></p>
-  </form>
+    <!-- Login Section -->
+    <div class="auth-card">
+      <h2>🔐 Log In</h2>
+      <form id="loginForm">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+        <p id="loginMessage"></p>
+        <div class="link">
+          <a href="reset-password.html">Forgot Password?</a>
+        </div>
+      </form>
+    </div>
+  </div>
 
-  <p><a href="reset-password.html">Forgot Password?</a></p>
+  <div class="toast" id="toast"></div>
 
   <script src="js/main.js"></script>
+  <script src="js/dark-mode.js"></script>
 </body>
 </html>

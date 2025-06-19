@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Profile</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-item">🏠 Home</a>
+      <a href="games.html" class="nav-item">🎮 Games</a>
+      <a href="download.html" class="nav-item">📦 Downloads</a>
+      <a href="contact.html" class="nav-item">✉️ Contact</a>
+      <a href="profile.html" class="nav-item active">👤 Profile</a>
+      <button onclick="toggleDarkMode()" style="margin-left:auto; padding:10px; background:none; color:white; border:none;">🌓</button>
+    </div>
+  </nav>
+
+  <h2>Your Profile</h2>
+  <p><strong>Username:</strong> <span id="profileUsername"></span></p>
+  <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+
+  <button id="deleteAccountBtn">❌ Delete My Account</button>
+  <p id="deleteStatus"></p>
+
+  <script>
+    const username = localStorage.getItem('username');
+    if (!username) location.href = 'index.html';
+
+    document.getElementById('profileUsername').textContent = username;
+    document.getElementById('profileEmail').textContent = `${username}@gmail.com`;
+
+    document.getElementById('deleteAccountBtn').onclick = async () => {
+      if (!confirm("Are you sure you want to delete your account?")) return;
+
+      const res = await fetch('/delete-account', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username })
+      });
+
+      const result = await res.json();
+      document.getElementById('deleteStatus').textContent = result.message;
+
+      if (result.success) {
+        localStorage.clear();
+        setTimeout(() => location.href = 'index.html', 3000);
+      }
+    };
+  </script>
+
+  <script src="js/dark-mode.js"></script>
+</body>
+</html>
