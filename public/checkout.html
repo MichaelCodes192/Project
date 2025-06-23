@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Support Us</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-item">🏠 Home</a>
+      <a href="games.html" class="nav-item">🎮 Games</a>
+      <a href="download.html" class="nav-item">📦 Downloads</a>
+      <a href="contact.html" class="nav-item">✉️ Contact</a>
+      <a href="checkout.html" class="nav-item active">💳 Donate</a>
+      <button onclick="toggleDarkMode()" style="margin-left:auto; padding:10px;">🌓</button>
+    </div>
+  </nav>
+
+  <div class="auth-container">
+    <div class="auth-card">
+      <h2><i class="fas fa-heart"></i> Support the Project</h2>
+      <p>Love what I’m building? You can support me by donating:</p>
+
+      <form id="donationForm">
+        <label for="amount">Choose an amount:</label>
+        <select id="amount" name="amount" required>
+          <option value="">-- Select --</option>
+          <option value="500">$5</option>
+          <option value="1000">$10</option>
+          <option value="2500">$25</option>
+          <option value="5000">$50</option>
+          <option value="10000">$100</option>
+          <option value="25000">$250</option>
+          <option value="50000">$500</option>
+        </select>
+        <br><br>
+        <button type="submit"><i class="fas fa-credit-card"></i> Donate Now</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('donationForm').onsubmit = async (e) => {
+      e.preventDefault();
+      const amount = document.getElementById('amount').value;
+      if (!amount) return alert("Please select an amount.");
+
+      const res = await fetch('/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount })
+      });
+
+      const { url } = await res.json();
+      if (url) {
+        window.location.href = url;
+      } else {
+        alert("Failed to start checkout session.");
+      }
+    };
+  </script>
+
+  <script src="js/dark-mode.js"></script>
+</body>
+</html>

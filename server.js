@@ -1,4 +1,5 @@
 require('dotenv').config();
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const express = require('express');
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
@@ -156,6 +157,35 @@ io.on('connection', socket => {
     }
   });
 });
+
+app.post('/create-checkout-session', async (req, res) => {
+  const { amount } = req.body;
+
+  try {
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      line_items: [{
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: 'Donation',
+          },
+          unit_amount: parseInt(amount)
+        },
+        quantity: 1,
+      }],
+      mode: 'payment',
+      success_url: 'http://localhost:3000/success.html',
+      cancel_url: 'http://localhost:3000/checkout.html',
+    });
+
+    res.json({ url: session.url });
+  } catch (err) {
+    console.error('[Stripe Error]', err);
+    res.status(500).json({ error: 'Something went wrong.' });
+  }
+});
+
 
 // 404 fallback
 app.use((req, res) => {

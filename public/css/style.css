@@ -32,7 +32,6 @@ body {
 }
 
 .nav-item {
-  flex: 1 0 auto;
   text-align: center;
   padding: 14px 20px;
   text-decoration: none;
@@ -267,3 +266,45 @@ body.dark-mode .chat-box {
   background-color: #2e2e2e;
   color: #eee;
 }
+
+.navbar {
+  background-color: var(--secondary-color);
+  overflow: hidden;
+}
+
+.nav-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.nav-item {
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: var(--nav-text-color);
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
+}
+
+.nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-item.active {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.nav-container button {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: var(--nav-text-color);
+  cursor: pointer;
+  padding: 10px;
+}
+
